@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "CamPaper",
+    "slug": "campaper",
+    "scheme": "campaper",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.campaper.app"
+    },
+    "android": {
+      "package": "com.campaper.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sharing",
+      "expo-status-bar",
+      "expo-dev-client",
+      [
+        "react-native-document-scanner-plugin",
+        {
+          "cameraPermission": "CamPaper menggunakan kamera untuk memindai dokumen yang akan diubah menjadi PDF."
+        }
+      ],
+      "expo-localization"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

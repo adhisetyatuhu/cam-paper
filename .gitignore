@@ -1,0 +1,74 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# generated native projects (regenerate with `npx expo prebuild`)
+/ios
+/android
+
+# Native build artifacts (in case native folders are ever tracked)
+*.apk
+*.aab
+*.ipa
+*.orig.*
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties
+ios/build/
+ios/Pods/
+
+# Kotlin/Gradle
+.kotlin/
+
+# Secrets & signing
+*.jks
+*.keystore
+*.p8
+*.p12
+*.key
+*.mobileprovision
+google-services.json
+GoogleService-Info.plist
+
+# Metro
+.metro-health-check*
+
+# Logs
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+*.log
+
+# Editors / IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+
+# Claude Code (personal/local only; shared config like settings.json is fine to commit)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+
+# OS
+.DS_Store
+Thumbs.db
+*.pem
+
+# Env files
+.env
+.env.local
+.env*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+coverage/
