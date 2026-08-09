@@ -9,11 +9,16 @@ import { colors } from '@/constants/theme';
 import { useLanguage } from '@/lib/i18n/LanguageProvider';
 import { listDocuments } from '@/lib/storage';
 import { DocumentRecord } from '@/lib/types';
+import { useViewMode } from '@/lib/viewMode';
+
+const GRID_COLUMNS = 3;
 
 export default function HomeScreen() {
   const [documents, setDocuments] = useState<DocumentRecord[]>([]);
   const insets = useSafeAreaInsets();
   const { t } = useLanguage();
+  const { mode } = useViewMode();
+  const numColumns = mode === 'grid' ? GRID_COLUMNS : 1;
 
   useFocusEffect(
     useCallback(() => {
@@ -30,7 +35,10 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <FlatList
+        key={mode}
         data={documents}
+        numColumns={numColumns}
+        columnWrapperStyle={mode === 'grid' ? styles.gridRow : undefined}
         keyExtractor={(item) => item.id}
         contentContainerStyle={[
           documents.length === 0 ? styles.emptyList : styles.list,
@@ -40,6 +48,7 @@ export default function HomeScreen() {
         renderItem={({ item }) => (
           <DocumentListItem
             document={item}
+            viewMode={mode}
             onPress={() => router.push(`/document/${item.id}`)}
           />
         )}
@@ -69,6 +78,9 @@ const styles = StyleSheet.create({
   },
   emptyList: {
     flexGrow: 1,
+  },
+  gridRow: {
+    gap: 12,
   },
   fab: {
     position: 'absolute',

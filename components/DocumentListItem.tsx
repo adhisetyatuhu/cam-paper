@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
 import { useLanguage } from '@/lib/i18n/LanguageProvider';
 import { DocumentRecord } from '@/lib/types';
+import { ViewMode } from '@/lib/viewMode';
 
 function formatDate(timestamp: number, localeTag: string): string {
   const date = new Date(timestamp);
@@ -17,12 +18,50 @@ function formatDate(timestamp: number, localeTag: string): string {
 
 export function DocumentListItem({
   document,
+  viewMode,
   onPress,
 }: {
   document: DocumentRecord;
+  viewMode: ViewMode;
   onPress: () => void;
 }) {
   const { t, localeTag } = useLanguage();
+  const dateText = formatDate(document.createdAt, localeTag);
+
+  if (viewMode === 'grid') {
+    return (
+      <Pressable
+        onPress={onPress}
+        style={({ pressed }) => [styles.gridContainer, pressed && styles.pressed]}
+      >
+        <View style={styles.gridIconWrap}>
+          <Text style={styles.iconText}>PDF</Text>
+        </View>
+        <Text style={styles.gridName} numberOfLines={2}>
+          {document.name}
+        </Text>
+      </Pressable>
+    );
+  }
+
+  if (viewMode === 'compact') {
+    return (
+      <Pressable
+        onPress={onPress}
+        style={({ pressed }) => [styles.compactContainer, pressed && styles.pressed]}
+      >
+        <View style={styles.compactIconWrap}>
+          <Text style={styles.compactIconText}>PDF</Text>
+        </View>
+        <Text style={styles.compactName} numberOfLines={1}>
+          {document.name}
+        </Text>
+        <Text style={styles.compactDate} numberOfLines={1}>
+          {dateText}
+        </Text>
+      </Pressable>
+    );
+  }
 
   return (
     <Pressable
@@ -39,7 +78,7 @@ export function DocumentListItem({
         <Text style={styles.meta}>
           {t('document_listMeta', {
             count: document.pageCount,
-            date: formatDate(document.createdAt, localeTag),
+            date: dateText,
           })}
         </Text>
       </View>
@@ -48,6 +87,16 @@ export function DocumentListItem({
 }
 
 const styles = StyleSheet.create({
+  pressed: {
+    opacity: 0.7,
+  },
+  iconText: {
+    color: colors.primaryText,
+    fontWeight: '700',
+    fontSize: 11,
+  },
+
+  // Detail layout (default)
   container: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -57,9 +106,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     gap: 12,
   },
-  pressed: {
-    opacity: 0.7,
-  },
   iconWrap: {
     width: 44,
     height: 44,
@@ -67,11 +113,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  iconText: {
-    color: colors.primaryText,
-    fontWeight: '700',
-    fontSize: 11,
   },
   info: {
     flex: 1,
@@ -85,5 +126,67 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     fontSize: 13,
     marginTop: 2,
+  },
+
+  // Compact layout
+  compactContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.surface,
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    marginBottom: 6,
+    gap: 10,
+  },
+  compactIconWrap: {
+    width: 28,
+    height: 28,
+    borderRadius: 6,
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  compactIconText: {
+    color: colors.primaryText,
+    fontWeight: '700',
+    fontSize: 8,
+  },
+  compactName: {
+    flex: 1,
+    color: colors.text,
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  compactDate: {
+    color: colors.textMuted,
+    fontSize: 11,
+    marginLeft: 8,
+  },
+
+  // Grid layout
+  gridContainer: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: colors.surface,
+    borderRadius: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 8,
+    marginBottom: 12,
+    gap: 8,
+  },
+  gridIconWrap: {
+    width: 48,
+    height: 48,
+    borderRadius: 10,
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gridName: {
+    color: colors.text,
+    fontSize: 12,
+    fontWeight: '600',
+    textAlign: 'center',
   },
 });

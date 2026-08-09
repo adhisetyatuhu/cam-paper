@@ -51,6 +51,10 @@ export const translations = {
     settings_languageSystemHint: 'Saat ini: {language}',
     settings_languageId: 'Bahasa Indonesia',
     settings_languageEn: 'English',
+
+    viewMode_compact: 'Kompak',
+    viewMode_detail: 'Detail',
+    viewMode_grid: 'Ikon',
   },
   en: {
     nav_documentTitle: 'Document',
@@ -98,6 +102,10 @@ export const translations = {
     settings_languageSystemHint: 'Currently: {language}',
     settings_languageId: 'Bahasa Indonesia',
     settings_languageEn: 'English',
+
+    viewMode_compact: 'Compact',
+    viewMode_detail: 'Detail',
+    viewMode_grid: 'Icons',
   },
 } as const;
 
