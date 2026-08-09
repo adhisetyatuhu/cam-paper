@@ -52,6 +52,12 @@ export const translations = {
     settings_languageId: 'Bahasa Indonesia',
     settings_languageEn: 'English',
 
+    settings_paperSize: 'Ukuran Kertas',
+    settings_paperSizeA4: 'A4',
+    settings_paperSizeLetter: 'Letter',
+    settings_paperSizeLegal: 'Legal',
+    settings_paperSizeF4: 'F4 (Folio)',
+
     viewMode_compact: 'Kompak',
     viewMode_detail: 'Detail',
     viewMode_grid: 'Ikon',
@@ -102,6 +108,12 @@ export const translations = {
     settings_languageSystemHint: 'Currently: {language}',
     settings_languageId: 'Bahasa Indonesia',
     settings_languageEn: 'English',
+
+    settings_paperSize: 'Paper Size',
+    settings_paperSizeA4: 'A4',
+    settings_paperSizeLetter: 'Letter',
+    settings_paperSizeLegal: 'Legal',
+    settings_paperSizeF4: 'F4 (Folio)',
 
     viewMode_compact: 'Compact',
     viewMode_detail: 'Detail',

@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { ViewModeToggle } from '@/components/ViewModeToggle';
 import { colors } from '@/constants/theme';
 import { LanguageProvider, useLanguage } from '@/lib/i18n/LanguageProvider';
+import { PaperSizeProvider } from '@/lib/paperSize';
 import { ViewModeProvider } from '@/lib/viewMode';
 
 function SettingsButton() {
@@ -47,10 +48,12 @@ function RootStack() {
 export default function RootLayout() {
   return (
     <LanguageProvider>
-      <ViewModeProvider>
-        <StatusBar style="light" />
-        <RootStack />
-      </ViewModeProvider>
+      <PaperSizeProvider>
+        <ViewModeProvider>
+          <StatusBar style="light" />
+          <RootStack />
+        </ViewModeProvider>
+      </PaperSizeProvider>
     </LanguageProvider>
   );
 }

@@ -9,6 +9,7 @@ import DocumentScanner, {
 import { colors } from '@/constants/theme';
 import { useLanguage } from '@/lib/i18n/LanguageProvider';
 import { TranslationKey } from '@/lib/i18n/translations';
+import { usePaperSize } from '@/lib/paperSize';
 import { createPdfFromImages } from '@/lib/pdf';
 import { saveDocument } from '@/lib/storage';
 
@@ -23,6 +24,7 @@ function defaultDocumentName(t: Translate, localeTag: string): string {
 
 export default function CameraScreen() {
   const { t, localeTag } = useLanguage();
+  const { paperSize } = usePaperSize();
   const [statusText, setStatusText] = useState(t('scan_opening'));
   const startedRef = useRef(false);
 
@@ -48,7 +50,7 @@ export default function CameraScreen() {
       }
 
       setStatusText(t('scan_generating'));
-      const pdfBase64 = await createPdfFromImages(scannedImages);
+      const pdfBase64 = await createPdfFromImages(scannedImages, paperSize);
       const document = await saveDocument({
         name: defaultDocumentName(t, localeTag),
         pdfBase64,

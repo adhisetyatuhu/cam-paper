@@ -1,5 +1,7 @@
 import * as Print from 'expo-print';
 
+import { PAPER_SIZES, PaperSize } from './paperSize';
+
 function buildHtml(imageDataUris: string[]): string {
   const pages = imageDataUris
     .map(
@@ -47,15 +49,24 @@ function buildHtml(imageDataUris: string[]): string {
  * check allows, causing "Missing 'READ' permission" errors on copy/read.
  * Requesting base64 sidesteps that cross-module file handoff entirely.
  */
-export async function createPdfFromImages(imagesBase64: string[]): Promise<string> {
+export async function createPdfFromImages(
+  imagesBase64: string[],
+  paperSize: PaperSize
+): Promise<string> {
   if (imagesBase64.length === 0) {
     throw new Error('createPdfFromImages: at least one image is required');
   }
 
   const imageDataUris = imagesBase64.map((base64) => `data:image/jpeg;base64,${base64}`);
+  const { widthPt, heightPt } = PAPER_SIZES[paperSize];
 
   const html = buildHtml(imageDataUris);
-  const { base64 } = await Print.printToFileAsync({ html, base64: true });
+  const { base64 } = await Print.printToFileAsync({
+    html,
+    base64: true,
+    width: widthPt,
+    height: heightPt,
+  });
   if (!base64) {
     throw new Error('Print.printToFileAsync did not return base64 PDF content');
   }

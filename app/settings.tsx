@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors } from '@/constants/theme';
 import { LanguagePreference, useLanguage } from '@/lib/i18n/LanguageProvider';
 import { TranslationKey } from '@/lib/i18n/translations';
+import { PaperSize, usePaperSize } from '@/lib/paperSize';
 
 const LANGUAGE_OPTIONS: { value: LanguagePreference; labelKey: TranslationKey }[] = [
   { value: 'system', labelKey: 'settings_languageSystem' },
@@ -10,8 +11,16 @@ const LANGUAGE_OPTIONS: { value: LanguagePreference; labelKey: TranslationKey }[
   { value: 'en', labelKey: 'settings_languageEn' },
 ];
 
+const PAPER_SIZE_OPTIONS: { value: PaperSize; labelKey: TranslationKey }[] = [
+  { value: 'a4', labelKey: 'settings_paperSizeA4' },
+  { value: 'letter', labelKey: 'settings_paperSizeLetter' },
+  { value: 'legal', labelKey: 'settings_paperSizeLegal' },
+  { value: 'f4', labelKey: 'settings_paperSizeF4' },
+];
+
 export default function SettingsScreen() {
   const { preference, language, setPreference, t } = useLanguage();
+  const { paperSize, setPaperSize } = usePaperSize();
 
   return (
     <View style={styles.container}>
@@ -40,6 +49,23 @@ export default function SettingsScreen() {
           );
         })}
       </View>
+
+      <Text style={[styles.sectionTitle, styles.sectionSpacing]}>{t('settings_paperSize')}</Text>
+      <View style={styles.card}>
+        {PAPER_SIZE_OPTIONS.map((option, index) => {
+          const selected = paperSize === option.value;
+          return (
+            <Pressable
+              key={option.value}
+              style={[styles.row, index < PAPER_SIZE_OPTIONS.length - 1 && styles.rowBorder]}
+              onPress={() => setPaperSize(option.value)}
+            >
+              <Text style={styles.rowLabel}>{t(option.labelKey)}</Text>
+              {selected && <Text style={styles.checkmark}>✓</Text>}
+            </Pressable>
+          );
+        })}
+      </View>
     </View>
   );
 }
@@ -57,6 +83,9 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     marginBottom: 8,
     marginLeft: 4,
+  },
+  sectionSpacing: {
+    marginTop: 24,
   },
   card: {
     backgroundColor: colors.surface,
