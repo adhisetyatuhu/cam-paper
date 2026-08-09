@@ -19,10 +19,12 @@ function formatDate(timestamp: number, localeTag: string): string {
 export function DocumentListItem({
   document,
   viewMode,
+  gridItemWidth,
   onPress,
 }: {
   document: DocumentRecord;
   viewMode: ViewMode;
+  gridItemWidth?: number;
   onPress: () => void;
 }) {
   const { t, localeTag } = useLanguage();
@@ -32,7 +34,11 @@ export function DocumentListItem({
     return (
       <Pressable
         onPress={onPress}
-        style={({ pressed }) => [styles.gridContainer, pressed && styles.pressed]}
+        style={({ pressed }) => [
+          styles.gridContainer,
+          gridItemWidth ? { width: gridItemWidth } : null,
+          pressed && styles.pressed,
+        ]}
       >
         <View style={styles.gridIconWrap}>
           <Text style={styles.iconText}>PDF</Text>
@@ -166,7 +172,6 @@ const styles = StyleSheet.create({
 
   // Grid layout
   gridContainer: {
-    flex: 1,
     alignItems: 'center',
     backgroundColor: colors.surface,
     borderRadius: 12,

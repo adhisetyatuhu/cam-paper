@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { router, useFocusEffect } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -12,13 +12,18 @@ import { DocumentRecord } from '@/lib/types';
 import { useViewMode } from '@/lib/viewMode';
 
 const GRID_COLUMNS = 3;
+const GRID_GAP = 12;
+const LIST_PADDING = 16;
 
 export default function HomeScreen() {
   const [documents, setDocuments] = useState<DocumentRecord[]>([]);
   const insets = useSafeAreaInsets();
+  const { width } = useWindowDimensions();
   const { t } = useLanguage();
   const { mode } = useViewMode();
   const numColumns = mode === 'grid' ? GRID_COLUMNS : 1;
+  const gridItemWidth =
+    (width - LIST_PADDING * 2 - GRID_GAP * (GRID_COLUMNS - 1)) / GRID_COLUMNS;
 
   useFocusEffect(
     useCallback(() => {
@@ -49,6 +54,7 @@ export default function HomeScreen() {
           <DocumentListItem
             document={item}
             viewMode={mode}
+            gridItemWidth={mode === 'grid' ? gridItemWidth : undefined}
             onPress={() => router.push(`/document/${item.id}`)}
           />
         )}
@@ -80,7 +86,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   gridRow: {
-    gap: 12,
+    gap: GRID_GAP,
+    justifyContent: 'flex-start',
   },
   fab: {
     position: 'absolute',
