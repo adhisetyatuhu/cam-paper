@@ -125,6 +125,11 @@ export default function DocumentDetailScreen() {
     setIsRenaming(false);
   }
 
+  function handleEditPages() {
+    if (!document) return;
+    router.push(`/document/${document.id}/edit`);
+  }
+
   function handleDelete() {
     if (!document) return;
     Alert.alert(
@@ -156,6 +161,8 @@ export default function DocumentDetailScreen() {
   if (!document) {
     return <View style={styles.container} />;
   }
+
+  const canEditPages = !fileMissing && !!document.pageUris?.length;
 
   return (
     <View style={styles.container}>
@@ -196,6 +203,11 @@ export default function DocumentDetailScreen() {
         >
           <Text style={styles.secondaryButtonText}>{t('document_share')}</Text>
         </Pressable>
+        {canEditPages && (
+          <Pressable style={styles.secondaryButton} onPress={handleEditPages}>
+            <Text style={styles.secondaryButtonText}>{t('document_editPages')}</Text>
+          </Pressable>
+        )}
         <Pressable style={styles.secondaryButton} onPress={handleOpenRename}>
           <Text style={styles.secondaryButtonText}>{t('document_rename')}</Text>
         </Pressable>

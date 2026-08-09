@@ -54,7 +54,7 @@ export default function CameraScreen() {
       const document = await saveDocument({
         name: defaultDocumentName(t, localeTag),
         pdfBase64,
-        pageCount: scannedImages.length,
+        pagesBase64: scannedImages,
       });
       router.replace(`/document/${document.id}`);
     } catch (error) {

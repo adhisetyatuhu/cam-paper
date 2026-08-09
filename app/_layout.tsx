@@ -39,7 +39,8 @@ function RootStack() {
     >
       <Stack.Screen name="index" options={{ title: 'CamPaper', headerRight: HomeHeaderRight }} />
       <Stack.Screen name="camera" options={{ presentation: 'fullScreenModal', headerShown: false }} />
-      <Stack.Screen name="document/[id]" options={{ title: t('nav_documentTitle') }} />
+      <Stack.Screen name="document/[id]/index" options={{ title: t('nav_documentTitle') }} />
+      <Stack.Screen name="document/[id]/edit" options={{ title: t('nav_editDocumentTitle') }} />
       <Stack.Screen name="settings" options={{ title: t('nav_settingsTitle') }} />
     </Stack>
   );

@@ -6,6 +6,7 @@ export const translations = {
   id: {
     nav_documentTitle: 'Dokumen',
     nav_settingsTitle: 'Pengaturan',
+    nav_editDocumentTitle: 'Edit Halaman',
 
     home_scanButton: '+ Scan Baru',
     home_emptyTitle: 'Belum ada dokumen',
@@ -19,6 +20,7 @@ export const translations = {
     document_open: 'Buka File',
     document_share: 'Bagikan / Simpan',
     document_rename: 'Ganti Nama',
+    document_editPages: 'Edit Halaman',
     document_delete: 'Hapus Dokumen',
     document_openFailedTitle: 'Tidak bisa membuka file',
     document_openFailedMessage:
@@ -46,6 +48,18 @@ export const translations = {
     scan_generating: 'Membuat PDF...',
     scan_failedTitle: 'Gagal memindai dokumen',
 
+    editPages_addButton: '+ Tambah Halaman',
+    editPages_pageLabel: 'Halaman {number}',
+    editPages_replace: 'Ganti',
+    editPages_delete: 'Hapus',
+    editPages_minPagesTitle: 'Tidak Bisa Dihapus',
+    editPages_minPagesMessage: 'Dokumen harus memiliki minimal 1 halaman.',
+    editPages_deleteConfirmTitle: 'Hapus halaman?',
+    editPages_deleteConfirmMessage: 'Halaman {number} akan dihapus dari dokumen.',
+    editPages_saveFailedTitle: 'Gagal menyimpan perubahan',
+    editPages_savingStatus: 'Menyimpan perubahan...',
+    editPages_emptyHint: 'Belum ada halaman. Ketuk "Tambah Halaman" untuk memindai.',
+
     settings_language: 'Bahasa',
     settings_languageSystem: 'Ikuti Bahasa Perangkat',
     settings_languageSystemHint: 'Saat ini: {language}',
@@ -65,6 +79,7 @@ export const translations = {
   en: {
     nav_documentTitle: 'Document',
     nav_settingsTitle: 'Settings',
+    nav_editDocumentTitle: 'Edit Pages',
 
     home_scanButton: '+ New Scan',
     home_emptyTitle: 'No documents yet',
@@ -77,6 +92,7 @@ export const translations = {
     document_open: 'Open File',
     document_share: 'Share / Save',
     document_rename: 'Rename',
+    document_editPages: 'Edit Pages',
     document_delete: 'Delete Document',
     document_openFailedTitle: 'Cannot open file',
     document_openFailedMessage: 'No PDF viewer app was found on this device. Try sharing the file instead.',
@@ -102,6 +118,18 @@ export const translations = {
     scan_opening: 'Opening camera...',
     scan_generating: 'Creating PDF...',
     scan_failedTitle: 'Failed to scan document',
+
+    editPages_addButton: '+ Add Page',
+    editPages_pageLabel: 'Page {number}',
+    editPages_replace: 'Replace',
+    editPages_delete: 'Delete',
+    editPages_minPagesTitle: 'Cannot Delete',
+    editPages_minPagesMessage: 'The document must have at least 1 page.',
+    editPages_deleteConfirmTitle: 'Delete page?',
+    editPages_deleteConfirmMessage: 'Page {number} will be removed from the document.',
+    editPages_saveFailedTitle: 'Failed to save changes',
+    editPages_savingStatus: 'Saving changes...',
+    editPages_emptyHint: 'No pages yet. Tap "Add Page" to scan.',
 
     settings_language: 'Language',
     settings_languageSystem: 'Follow Device Language',
